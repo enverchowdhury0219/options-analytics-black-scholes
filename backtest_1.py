@@ -20,6 +20,6 @@ class MySMAStrategy(Strategy):
 backtest = Backtest(EURUSD, MySMAStrategy,  commission=.002, exclusive_orders = True)
 stats = backtest.run()
 
-print(stats)
+
 
 backtest.plot()
