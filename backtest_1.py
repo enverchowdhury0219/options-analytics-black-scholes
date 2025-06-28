@@ -1,8 +1,8 @@
 from backtesting import Backtest, Strategy
 from backtesting.lib import crossover
-from backtesting.test import SMA, EURUSD
+from backtesting.test import SMA, GOOG
 
-#testing a simple moving average strategy using the EURO to USD currency pair data
+#testing a simple moving average strategy using stock google data
 class MySMAStrategy(Strategy):
     def init(self):
         price = self.data.Close
@@ -17,7 +17,7 @@ class MySMAStrategy(Strategy):
 
 
 
-backtest = Backtest(EURUSD, MySMAStrategy,  commission=.002, exclusive_orders = True)
+backtest = Backtest(GOOG, MySMAStrategy,  commission=.002, exclusive_orders = True)
 stats = backtest.run()
 
 

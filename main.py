@@ -26,9 +26,69 @@ df['Delta'] = df.apply(lambda row: black_scholes_delta(
 #Plot delta over time
 plt.figure(figsize=(12, 5))
 plt.plot(df['Delta'])
+# plt.plot(df['Close'])
 plt.ylim(0.5, 0.52)
 plt.title('SPY Call Option Delta Over Time')
 plt.ylabel('Delta')
 plt.xlabel('Date')
 plt.grid(True)
 plt.show()
+
+# from data_handling import get_spy_data
+# from strategy import DeltaStrategy
+# from backtesting import Backtest
+# import pandas as pd
+
+# # Step 1: Load SPY data
+# df = get_spy_data(start='2020-01-01', end='2023-01-01')
+
+# # Step 2: Add required OHLC and Volume fields
+# df['Open'] = df['Close']
+# df['High'] = df['Close']
+# df['Low'] = df['Close']
+# df['Volume'] = 1  # dummy volume
+
+# # Step 3: Reset index and format
+# df = df.reset_index()
+# df.rename(columns={'Date': 'Date'}, inplace=True)
+# df = df[['Date', 'Open', 'High', 'Low', 'Close', 'Volume']]
+# df.columns = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume']
+# df.set_index('Date', inplace=False)
+
+# # Step 4: Run backtest
+# bt = Backtest(df, DeltaStrategy, commission=.002, exclusive_orders= True)
+# stats = bt.run()
+# print(stats)
+# # bt.plot()
+
+# from data_handling import get_spy_data
+# from strategy import DeltaStrategy
+# from backtesting import Backtest
+
+# # Step 1: Load data
+# df = get_spy_data(start='2020-01-01', end='2023-01-01')
+
+# # Step 2: Add required OHLC and volume
+# df['Open'] = df['Close']
+# df['High'] = df['Close']
+# df['Low'] = df['Close']
+# df['Volume'] = 1  # dummy volume
+
+# # Step 3: Reset index so 'Date' becomes a column
+# df = df.reset_index()
+
+# # Step 4: Rename columns safely
+# df.columns = ['Date', 'Close', 'Open', 'High', 'Low', 'Volume']
+
+# # Step 5: Reorder columns to match expected order
+# df = df[['Date', 'Open', 'High', 'Low', 'Close', 'Volume']]
+
+# # Step 6: Confirm shape
+# print(df.head())  # Optional debug
+
+# # Step 7: Run the backtest
+# bt = Backtest(df, DeltaStrategy, cash=10000, commission=0.002, exclusive_orders=True)
+# stats = bt.run()
+# bt.plot()
+# print(stats)
+
