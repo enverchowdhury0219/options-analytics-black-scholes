@@ -51,12 +51,21 @@ for i in range(0, len(df), 30):
 
 # Plot Option Price on second axis
 ax2 = ax1.twinx()
-ax2.set_ylabel('Option Price ($)', color='tab:red', fontsize=14)
-ax2.plot(df['Date'], df['Price'], color='tab:red', linewidth=2.0, label='Option Price')
-ax2.tick_params(axis='y', labelcolor='tab:red', labelsize=12)
+ax2.set_ylabel('Option Price ($)', color='tab:purple', fontsize=14)
+ax2.plot(df['Date'], df['Price'], color='tab:purple', linewidth=2.0, label='Option Price')
+ax2.tick_params(axis='y', labelcolor='tab:purple', labelsize=12)
 ax2.set_ylim(0, df['Price'].max() * 1.1)
 
 # Annotate a price peak
+peak_idx = df['Price'].idxmax()
+peak_date = df['Date'][peak_idx]
+peak_price = df['Price'][peak_idx]
+
+min_idx = df['Price'].idxmin()
+min_date = df['Date'][min_idx]
+min_price = df['Price'][min_idx]
+
+#TODO:make this for delta value max and min
 peak_idx = df['Price'].idxmax()
 peak_date = df['Date'][peak_idx]
 peak_price = df['Price'][peak_idx]
