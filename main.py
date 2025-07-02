@@ -1,4 +1,4 @@
-from black_scholes import black_scholes_delta
+from black_scholes import black_scholes_delta, black_scholes_price
 from data_handling import get_spy_data
 import matplotlib.pyplot as plt
 
@@ -23,72 +23,62 @@ df['Delta'] = df.apply(lambda row: black_scholes_delta(
     sigma=0.2
 ), axis=1)
 
-#Plot delta over time
-plt.figure(figsize=(12, 5))
-plt.plot(df['Delta'])
-# plt.plot(df['Close'])
-plt.ylim(0.5, 0.52)
-plt.title('SPY Call Option Delta Over Time')
-plt.ylabel('Delta')
-plt.xlabel('Date')
+df['Price'] = df.apply(lambda row: black_scholes_price(
+    S=float(row['Close']),
+    K=float(row['Close']),         # ATM
+    T=float(row['T']),
+    r=0.01,
+    sigma=0.2
+), axis=1)
+
+# Reset index just in case
+df = df.reset_index(drop=True)
+
+# Create plot
+fig, ax1 = plt.subplots(figsize=(16, 8))
+
+# Plot Delta
+ax1.set_xlabel('Date', fontsize=14)
+ax1.set_ylabel('Delta', color='tab:blue', fontsize=14)
+ax1.plot(df['Date'], df['Delta'], color='tab:blue', linewidth=2.0, label='Delta')
+ax1.tick_params(axis='y', labelcolor='tab:blue', labelsize=12)
+ax1.tick_params(axis='x', labelsize=12)
+ax1.set_ylim(0.49, 0.55)
+
+# Add vertical lines every 30 days (option "roll" markers)
+for i in range(0, len(df), 30):
+    ax1.axvline(x=df['Date'][i], color='gray', linestyle='--', linewidth=0.8, alpha=0.5)
+
+# Plot Option Price on second axis
+ax2 = ax1.twinx()
+ax2.set_ylabel('Option Price ($)', color='tab:red', fontsize=14)
+ax2.plot(df['Date'], df['Price'], color='tab:red', linewidth=2.0, label='Option Price')
+ax2.tick_params(axis='y', labelcolor='tab:red', labelsize=12)
+ax2.set_ylim(0, df['Price'].max() * 1.1)
+
+# Annotate a price peak
+peak_idx = df['Price'].idxmax()
+peak_date = df['Date'][peak_idx]
+peak_price = df['Price'][peak_idx]
+
+# min_idx = df['Price'].idxmin()
+# min_date = df['Date'][min_idx]
+# min_price = df['Price'][min_idx]
+
+#TODO: annotate max delta value
+ax2.plot(peak_date, peak_price, marker='o', color='red', markersize=9, label='Peak Option Price')
+# ax2.plot(min_date, min_price, marker='o', color='red', markersize=9, label='Min Option Price')
+
+# Combine legends from both axes
+lines_1, labels_1 = ax1.get_legend_handles_labels()
+lines_2, labels_2 = ax2.get_legend_handles_labels()
+ax1.legend(lines_1 + lines_2, labels_1 + labels_2, loc='best')
+
+# Title and layout
+plt.title('SPY ETF 30-Day ATM Call Option: Delta and Price Over Time (Black-Scholes)', fontsize=12)
 plt.grid(True)
+plt.tight_layout()
 plt.show()
 
-# from data_handling import get_spy_data
-# from strategy import DeltaStrategy
-# from backtesting import Backtest
-# import pandas as pd
 
-# # Step 1: Load SPY data
-# df = get_spy_data(start='2020-01-01', end='2023-01-01')
-
-# # Step 2: Add required OHLC and Volume fields
-# df['Open'] = df['Close']
-# df['High'] = df['Close']
-# df['Low'] = df['Close']
-# df['Volume'] = 1  # dummy volume
-
-# # Step 3: Reset index and format
-# df = df.reset_index()
-# df.rename(columns={'Date': 'Date'}, inplace=True)
-# df = df[['Date', 'Open', 'High', 'Low', 'Close', 'Volume']]
-# df.columns = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume']
-# df.set_index('Date', inplace=False)
-
-# # Step 4: Run backtest
-# bt = Backtest(df, DeltaStrategy, commission=.002, exclusive_orders= True)
-# stats = bt.run()
-# print(stats)
-# # bt.plot()
-
-# from data_handling import get_spy_data
-# from strategy import DeltaStrategy
-# from backtesting import Backtest
-
-# # Step 1: Load data
-# df = get_spy_data(start='2020-01-01', end='2023-01-01')
-
-# # Step 2: Add required OHLC and volume
-# df['Open'] = df['Close']
-# df['High'] = df['Close']
-# df['Low'] = df['Close']
-# df['Volume'] = 1  # dummy volume
-
-# # Step 3: Reset index so 'Date' becomes a column
-# df = df.reset_index()
-
-# # Step 4: Rename columns safely
-# df.columns = ['Date', 'Close', 'Open', 'High', 'Low', 'Volume']
-
-# # Step 5: Reorder columns to match expected order
-# df = df[['Date', 'Open', 'High', 'Low', 'Close', 'Volume']]
-
-# # Step 6: Confirm shape
-# print(df.head())  # Optional debug
-
-# # Step 7: Run the backtest
-# bt = Backtest(df, DeltaStrategy, cash=10000, commission=0.002, exclusive_orders=True)
-# stats = bt.run()
-# bt.plot()
-# print(stats)
 
