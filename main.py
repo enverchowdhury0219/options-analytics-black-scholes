@@ -61,13 +61,11 @@ peak_idx = df['Price'].idxmax()
 peak_date = df['Date'][peak_idx]
 peak_price = df['Price'][peak_idx]
 
-# min_idx = df['Price'].idxmin()
-# min_date = df['Date'][min_idx]
-# min_price = df['Price'][min_idx]
+peak_delta_indx = df['Delta'].idxmax()
+max_delta_date = df['Delta'][peak_delta_indx]
+max_delta = df['Delta'][peak_delta_indx]
 
-#TODO: annotate max delta value
 ax2.plot(peak_date, peak_price, marker='o', color='red', markersize=9, label='Peak Option Price')
-# ax2.plot(min_date, min_price, marker='o', color='red', markersize=9, label='Min Option Price')
 
 # Combine legends from both axes
 lines_1, labels_1 = ax1.get_legend_handles_labels()
@@ -75,10 +73,11 @@ lines_2, labels_2 = ax2.get_legend_handles_labels()
 ax1.legend(lines_1 + lines_2, labels_1 + labels_2, loc='best')
 
 # Title and layout
-plt.title('SPY ETF 30-Day ATM Call Option: Delta and Price Over Time (Black-Scholes)', fontsize=12)
+plt.title('SPY ETF 30-Day ATM Call Option: Delta and Price Over Last Decade (Black-Scholes)', fontsize=12)
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+
 
 
 
