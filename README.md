@@ -1,6 +1,6 @@
 # 📈 Options Analytics & Black-Scholes Visualization
 
-![Delta vs. Option Price](output/price_against_time.png)
+![Delta vs. Option Price](output/price_and_delta_against_time.png)
 
 ## Overview
 
