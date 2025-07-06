@@ -6,11 +6,11 @@
 
 This project models and visualizes the behavior of rolling **30-day at-the-money (ATM) call options** on the SPY ETF using the **Black-Scholes pricing formula**. It combines real historical market data from Yahoo Finance with financial theory to show how option sensitivity (Delta) and theoretical price evolve over time.
 
-By plotting these dynamics, I explore how **Greeks** change with **time to expiry**, **underlying price**, and **volatility** — key concepts in options trading and quantitative finance.
+By plotting these dynamics, I explore how **Delta** of the **Greeks** change with **time to expiry**, **underlying price**, and **volatility** — key concepts in options trading and quantitative finance.
 
 ---
 
-## 🔧 Tools & Libraries
+## Tools & Libraries
 
 - `NumPy`, `pandas`: for modeling and data processing  
 - `matplotlib`: for dual-axis time-series visualization  
@@ -19,7 +19,7 @@ By plotting these dynamics, I explore how **Greeks** change with **time to expir
 
 ---
 
-## 📊 What This Project Shows
+## What This Project Shows
 
 - **Delta decay**: The sensitivity of an option to its underlying asset changes as expiry approaches.  
 - **Moneyness shifts**: As SPY’s price fluctuates, options drift between in-the-money and out-of-the-money, affecting both price and Delta.  
@@ -40,8 +40,8 @@ This was my **first project in quantitative finance**, and it taught me:
 
 ---
 
-## Use case
+## Why I did this
 
-Understanding how options behave over time is foundational for building **risk-managed strategies**, whether for hedging or speculation. This project sets the stage for my next goal: building and backtesting complete  **trading strategies** using Python.
+Understanding how options behave over time is foundational for building **risk-managed strategies**, whether for hedging or speculation. This project sets the stage for a future goal: building and backtesting complete **trading strategies** using Python.
 
 It’s a small but meaningful step into the world of **quantitative trading**, where theory, data, and execution all converge.
