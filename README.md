@@ -27,7 +27,11 @@ By plotting these dynamics, I explore how **Delta** of the **Greeks** change wit
 
 The graph visualizes these insights together — offering a clear, data-driven window into how an option “breathes” with the market.
 
+📉 **Graph Insight**:  
+The dual-axis plot reveals that while **Delta remains relatively stable around 0.51**, the **option price steadily increases** alongside SPY. This demonstrates how **option prices can grow despite minimal changes in Delta**, emphasizing the role of underlying price trends and time decay in shaping value.
+
 ---
+
 
 ## Takeaways
 
