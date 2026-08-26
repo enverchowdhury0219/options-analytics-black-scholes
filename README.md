@@ -1,4 +1,4 @@
-# Options Analytics & Black-Scholes Visualization
+# Options - Black-Scholes Visualization
 
 <img src="output/price_and_delta_against_time.png" alt="Delta vs. Option Price" width="600">
 
