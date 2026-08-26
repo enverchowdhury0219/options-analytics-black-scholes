@@ -1,6 +1,6 @@
 # Options Analytics & Black-Scholes Visualization
 
-![Delta vs. Option Price](output/price_and_delta_against_time.png)
+<img src="output/price_and_delta_against_time.png" alt="Delta vs. Option Price" width="600">
 
 ## Overview
 
