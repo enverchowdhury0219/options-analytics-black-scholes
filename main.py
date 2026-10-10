@@ -2,7 +2,7 @@ from black_scholes import black_scholes_delta, black_scholes_price
 from data_handling import get_spy_data
 import matplotlib.pyplot as plt
 
-# constants we use
+# constants
 T = 30 / 365    # simulating one month expiry
 r = 0.01        # risk-free rate
 sigma = 0.2     # volatility
@@ -17,7 +17,7 @@ df['T'] = df['T'].astype(float)
 
 df['Delta'] = df.apply(lambda row: black_scholes_delta(
     S=float(row['Close']),
-    K=float(row['Close']),         # strike price matches the close price, so it is at the money
+    K=float(row['Close']), # strike price matches the close price, so it is at the money
     T=float(row['T']),
     r=0.01,
     sigma=0.2
@@ -25,13 +25,13 @@ df['Delta'] = df.apply(lambda row: black_scholes_delta(
 
 df['Price'] = df.apply(lambda row: black_scholes_price(
     S=float(row['Close']),
-    K=float(row['Close']),         # strike price matches the close price, so it is at the money
+    K=float(row['Close']),   
     T=float(row['T']),
     r=0.01,
     sigma=0.2
 ), axis=1)
 
-# reset index for precaution
+# reset index (precaution)
 df = df.reset_index(drop=True)
 
 # generating the double axes plot
@@ -63,7 +63,7 @@ peak_price = df['Price'][peak_idx]
 
 ax2.plot(peak_date, peak_price, marker='o', color='red', markersize=9, label='Peak Option Price')
 
-# creating a legend from both axes
+# creating legend
 lines_1, labels_1 = ax1.get_legend_handles_labels()
 lines_2, labels_2 = ax2.get_legend_handles_labels()
 ax1.legend(lines_1 + lines_2, labels_1 + labels_2, loc='best')

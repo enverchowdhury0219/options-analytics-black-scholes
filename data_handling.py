@@ -3,7 +3,7 @@ import pandas as pd
 
 def get_spy_data(start='2015-01-01', end='2025-01-01'):
     """
-    this retrieves close prices of the SPY ETF within a given time interval (here being the last 10 years)
+    retrieves close prices of the SPY ETF within a given time interval (here being the last 10 years)
     
     example output:
     Price            Close
@@ -16,10 +16,6 @@ def get_spy_data(start='2015-01-01', end='2025-01-01'):
     2020-01-08  299.019318
     ...                ...
     2022-12-23  370.189178
-    2022-12-27  368.729309
-    2022-12-28  364.146881
-    2022-12-29  370.701630
-    2022-12-30  369.725189
     """
     spy = yf.download('SPY', start=start, end=end)
     spy = spy[['Close']]
